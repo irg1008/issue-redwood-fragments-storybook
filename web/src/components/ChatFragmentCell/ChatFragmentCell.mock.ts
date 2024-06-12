@@ -1,7 +1,7 @@
 import { ChatMessageFragment } from 'types/graphql'
 
 // Define your own mock data here:
-export const standard = (/* vars, { ctx, req } */) => ({
+export const standardWithFragments = (/* vars, { ctx, req } */) => ({
   chatMessages: Array.from({ length: 20 }, (_, index) => ({
     body: `Message with Fragment ${index + 7}`,
     createdAt: '2024-05-01T00:00:00.000Z',

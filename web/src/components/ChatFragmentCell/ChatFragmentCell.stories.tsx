@@ -3,7 +3,7 @@ import { MockSubscriptionLink } from '@apollo/client/testing'
 import type { Decorator, Meta, StoryObj } from '@storybook/react'
 
 import { Failure, Loading, Success } from './ChatFragmentCell'
-import { standard } from './ChatFragmentCell.mock'
+import { standardWithFragments } from './ChatFragmentCell.mock'
 
 const meta: Meta = {
   title: 'Cells/Chat/ChatFragmentMessagesCell',
@@ -28,7 +28,7 @@ const subscriptionDecorator: Decorator = (Story) => {
 
 export const success: StoryObj<typeof Success> = {
   render: (args) => {
-    return Success ? <Success {...standard()} {...args} /> : <></>
+    return Success ? <Success {...standardWithFragments()} {...args} /> : <></>
   },
   decorators: [subscriptionDecorator],
 }

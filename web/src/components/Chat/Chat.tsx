@@ -1,4 +1,4 @@
-import ChatCell from '../ChatCell'
+import ChatCell from 'src/components/ChatCell'
 
 const Chat = () => {
   return <ChatCell chatRoomId="1" />
