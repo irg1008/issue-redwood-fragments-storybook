@@ -1,4 +1,4 @@
-import { ChatMessageFragment } from 'types/graphql'
+import { ChatMessage } from 'types/graphql'
 
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
@@ -10,5 +10,6 @@ export const standard = (/* vars, { ctx, req } */) => ({
       displayName: `User ${(index % 5) + 1}`, // Cycle through 5 different users
       id: (index % 5) + 1,
     },
-  })) satisfies ChatMessageFragment[],
+    chatRoomId: '42',
+  })) satisfies ChatMessage[],
 })

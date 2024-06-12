@@ -15,24 +15,30 @@ import {
   type CellSuccessProps,
   type TypedDocumentNode,
 } from '@redwoodjs/web'
-// import { registerFragment } from '@redwoodjs/web/apollo'
+import { registerFragment } from '@redwoodjs/web/apollo'
 
 export type ChatMessagesCellProps = Pick<ChatMessageInput, 'chatRoomId'>
 
-// COMMENT THIS TO TEST FRAGMENT. THEN GO STORYBOOK > COMPONENTS > CHAT
+registerFragment(gql`
+  fragment ChatMessageFragment on ChatMessage {
+    id
+    body
+    createdAt
+    user {
+      id
+      displayName
+    }
+  }
+`)
+
+// UMCOMMENT THIS TO TEST FRAGMENT
 export const QUERY: TypedDocumentNode<
   ChatMessagesQuery,
   ChatMessagesQueryVariables
 > = gql`
   query ChatMessagesQuery($chatRoomId: String!) {
     chatMessages(chatRoomId: $chatRoomId) {
-      id
-      body
-      createdAt
-      user {
-        id
-        displayName
-      }
+      ...ChatMessageFragment
     }
   }
 `
@@ -107,10 +113,10 @@ export const Success = ({
 
   return (
     <>
-      REMOVED REALTIME FOR SIMPLER REPRO (F5)
+      REMOVED REALTIME FOR SIMPLER REPRO (F5 fragment) - with fragments
       {messages.length === 0 && (
         <div className="grid h-full place-content-center place-items-center gap-2">
-          {`It's so empty here`}
+          {`It's so empty here -- with fragments`}
         </div>
       )}
       <div className="flex flex-col-reverse overflow-auto p-3">
@@ -120,8 +126,12 @@ export const Success = ({
               key={item.id}
               className="animate-appearance-in text-small flex w-full flex-wrap gap-1"
             >
-              <span className="inline-flex h-6">{item.user.displayName}:</span>
-              <span className="[word-break:break-word]">{item.body}</span>
+              <span className="inline-flex h-6">
+                {item.user.displayName} fragment cell:
+              </span>
+              <span className="[word-break:break-word]">
+                {item.body} -- fragment cell
+              </span>
             </li>
           ))}
         </ul>
